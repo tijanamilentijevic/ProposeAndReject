@@ -130,15 +130,15 @@ def create_matrix():
 
 
 if __name__ == "__main__":
-    # n = int(input("Enter the size of the matrix:"))
-    # p = float(input("Enter the probability that two nodes communicate with each other (form 0.x):"))
-    # b = int(input("Enter the degree of DAN:"))
-    # l = int(input("Enter the number of levels that fattree contains:"))
-    n = 5
-    p = 0.6
-    b = 2
-    l = 3
-    log = True  # for printing
+    n = int(input("Enter the size of the matrix:"))
+    p = float(input("Enter the probability that two nodes communicate with each other (form 0.x):"))
+    b = int(input("Enter the degree of DAN:"))
+    l = int(input("Enter the number of levels that fattree contains:"))
+    logs = input("Would you like a printed output of the algorithm? y/n ")
+    if logs == "y":
+        log = True  # for printing
+    else:
+        log = False
     if log:
         print("n = {}, p = {}, b = {}, l = {}".format(n, p, b, l))
     for i in range(1):
