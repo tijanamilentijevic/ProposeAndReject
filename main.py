@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Node:
@@ -135,24 +136,73 @@ if __name__ == "__main__":
     b = int(input("Enter the degree of DAN:"))
     l = int(input("Enter the number of levels that fattree contains:"))
     logs = input("Would you like a printed output of the algorithm? y/n ")
+    #logs = "n"
     if logs == "y":
         log = True  # for printing
     else:
         log = False
-    if log:
+    """
+    p=0.2
+    cr_avg1 = 0
+    cr_avg2 = 0
+    cr_avg3 = 0
+    data1 = []
+    data2 = []
+    data3 = []
+    # print("n = {}, p = {}, b = {}, l = {}".format(n, p, b, l))
+    prob = [0.2,0.3,0.4]
+    for pe in prob:
+        p=pe
         print("n = {}, p = {}, b = {}, l = {}".format(n, p, b, l))
-    for i in range(1):
-        nodes = []  # array of elements from class Node
-        matrix = np.random.rand(n, n)
-        proposals = np.zeros((n, n))
-        create_matrix()
-        if log: print(matrix)
-        create_entries()
-        CR = send_entries()
+        for i in range(3):
+            nodes = []  # array of elements from class Node
+            matrix = np.random.rand(n, n)
+            proposals = np.zeros((n, n))
+            create_matrix()
+            if log: print(matrix)
+            create_entries()
+            CR = send_entries()
+            if pe == 0.2:
+                cr_avg1 += CR
+                data1.append(CR)
+            elif pe == 0.3:
+                cr_avg2 += CR
+                data2.append(CR)
+            else:
+                cr_avg3 += CR
+                data3.append(CR)
+            print('finished {}'.format(i))
+    """
+    nodes = []  # array of elements from class Node
+    matrix = np.random.rand(n, n)
+    proposals = np.zeros((n, n))
+    create_matrix()
+    if log: print(matrix)
+    create_entries()
+    send_entries()
     if log:
         for k in nodes:
             print("Node {} has connection to: ".format(k.id), end='')
             for j in k.accepted_nodes:
                 print("{}, ".format(j.id), end='')
             print('')
-        print("Communication Rounds: {}".format(CR))
+    """
+    # print("Communication Rounds: {}".format(CR))
+    print("Za l=3: {}, za l=4: {}, za l=5: {} ".format(cr_avg1, cr_avg2, cr_avg3))
+    # names = ['p = 0.2', 'p = 0.3', 'p = 0.4', 'p = 0.5', 'p = 0.6', 'p = 0.7']
+    # plt.bar(names, [round(cr_avg1 / 100), round(cr_avg2 / 100), round(cr_avg3 / 100), round(cr_avg4 / 100), round(cr_avg5 / 100), round(cr_avg6 / 100)])
+    data = [data1, data2, data3]
+
+    fig = plt.figure(figsize=(10, 7))
+
+    fig1, ax1 = plt.subplots()
+    ax1.boxplot(data)
+    ax1.set_title(
+        'Repetitions of the modified version of \n the "Propose and Reject" algorithm \n with n = 1024, p = 0.2 and b = 4')
+    ax1.set_ylabel('Average number of communication rounds')
+    # ax = fig.add_axes([0, 0, 1, 1])
+    # bp = ax.boxplot(data)
+    # plt.ylabel('Average number of communication rounds')
+    plt.show()
+    """
+
